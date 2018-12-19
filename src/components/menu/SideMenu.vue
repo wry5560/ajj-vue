@@ -10,21 +10,21 @@
       :collapsed="collapsed"
       :menu="menus"
       :theme="theme"
-      @select="onSelect"
       :mode="mode"
+      @select="onSelect"
       style="padding: 16px 0px;"></s-menu>
   </a-layout-sider>
 
 </template>
 
 <script>
-  import ALayoutSider from "ant-design-vue/es/layout/Sider"
+  import ALayoutSider from 'ant-design-vue/es/layout/Sider'
   import Logo from '../tools/Logo'
   import SMenu from './index'
   import { mixin, mixinDevice } from '@/utils/mixin.js'
 
   export default {
-    name: "SideMenu",
+    name: 'SideMenu',
     components: { ALayoutSider, Logo, SMenu },
     mixins: [mixin, mixinDevice],
     props: {

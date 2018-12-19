@@ -100,6 +100,12 @@ export const asyncRouterMap = [
             meta: { title: '角色列表', permission: [ 'table' ] }
           },
           {
+            path: '/list/system-role',
+            name: 'SystemRole',
+            component: () => import('@/views/role/RoleList'),
+            meta: { title: '角色列表2', permission: [ 'table' ]}
+          },
+          {
             path: '/list/permission-list',
             name: 'PermissionList',
             component: () => import('@/views/list/PermissionList'),
