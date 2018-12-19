@@ -1,17 +1,17 @@
 <template>
   <div class="footer">
-    <div class="links">
-      <a href="https://pro.ant.design/" target="_blank">Pro 首页</a>
-      <a href="https://github.com/ant-design/ant-design-pro" target="_blank">
-        <a-icon type="github"/>
-      </a>
-      <a href="https://ant.design/">Ant Design</a>
-      <a href="https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn/">Vue Antd</a>
-    </div>
+    <!--<div class="links">-->
+      <!--<a href="https://pro.ant.design/" target="_blank">Pro 首页</a>-->
+      <!--<a href="https://github.com/ant-design/ant-design-pro" target="_blank">-->
+        <!--<a-icon type="github"/>-->
+      <!--</a>-->
+      <!--<a href="https://ant.design/">Ant Design</a>-->
+      <!--<a href="https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn/">Vue Antd</a>-->
+    <!--</div>-->
     <div class="copyright">
       Copyright
       <a-icon type="copyright"/>
-      2018 <span>白鹭学园技术组出品</span>
+      2018 <span>珠海市横琴新区安全生产监督管理局</span>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@
 <style lang="scss" scoped>
   .footer {
     padding: 0 16px;
-    margin: 48px 0 24px;
+    margin: 8px 0 8px;
     text-align: center;
 
     .links {
