@@ -59,7 +59,7 @@
       />
 
       <!-- layout content -->
-      <a-layout-content :style="{ margin: '24px 24px 0', height: '100%', paddingTop: fixedHeader ? '64px' : '0' }">
+      <a-layout-content :style="{ margin: '24px 24px 0', height: '100%', paddingTop: fixedHeader ? '94px' : '0' }">
         <slot></slot>
       </a-layout-content>
 
@@ -138,7 +138,7 @@
   }
 
   .layout {
-    min-height: 100vh;
+    min-height: 100vh !important;
     overflow-x: hidden;
 
     &.mobile {

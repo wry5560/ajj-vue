@@ -27,3 +27,9 @@
       }
   }
 </script>
+<style lang="scss">
+  iframe{
+    margin: -24px;
+    margin-bottom: 0;
+  }
+</style>
