@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="layout" :class="[device]">
+  <a-layout class="layout" :class="[device]" style="height: 100%;">
 
     <template v-if="layoutMode === 'sidemenu'">
       <a-drawer

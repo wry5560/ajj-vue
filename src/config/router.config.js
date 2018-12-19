@@ -276,7 +276,24 @@ export const asyncRouterMap = [
             ]
           },
         ]
+      },
+
+      // Iframe Test
+      {
+        path:"/iframe",
+        component: RouteView,
+        name:"iframeTest",
+        meta: { title: 'Iframe页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
+        children: [
+            {
+              path: '/iframe/baidu',
+              name: 'baidu',
+              component: () => import('@/views/iframeMenu/IframeMenu'),
+              meta: { title: '百度', keepAlive: true, permission: [ 'user' ] }
+            }
+          ]
       }
+
     ]
   },
   {
@@ -321,6 +338,11 @@ export const constantRouterMap = [
       {
         path: 'home',
         name: 'TestHome',
+        component: () => import('@/views/Home')
+      },
+      {
+        path: 'api',
+        name: 'api',
         component: () => import('@/views/Home')
       }
     ]
