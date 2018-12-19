@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: "Logo",
+    name: 'Logo',
     props: {
       title: {
         type: String,
