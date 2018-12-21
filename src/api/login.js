@@ -47,3 +47,13 @@ export function logout() {
     }
   })
 }
+
+export function gsoftGetInfo() {
+  return axios({
+    url: '/user/gsoftInfo',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8'
+    }
+  })
+}

@@ -18,7 +18,7 @@ export const asyncRouterMap = [
         meta: { title: '仪表盘', icon: 'dashboard', permission: [ 'dashboard' ] },
         children: [
           {
-            path: '/dashboard/analysis',
+            path: '/analysis',
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
             meta: { title: '分析页', permission: [ 'dashboard' ] }

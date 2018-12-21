@@ -69,6 +69,14 @@ const permission = {
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })
+    },
+    GenerateGsoftRoutes({ commit }, data) {
+      debugger
+      return new Promise(resolve => {
+        const { roles } = data
+        commit('SET_ROUTERS', roles.routes)
+        resolve()
+      })
     }
   }
 }

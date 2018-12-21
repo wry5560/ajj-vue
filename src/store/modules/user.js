@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import { login, getInfo, logout } from '@/api/login'
+import { login, getInfo,gsoftGetInfo, logout } from '@/api/login'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { welcome } from '@/utils/util'
+import initGsoftInfo from '@/utils/initGsoftInfo'
 
 const user = {
   state: {
@@ -38,8 +39,10 @@ const user = {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
           const result = response.result
+          debugger
           Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
           commit('SET_TOKEN', result.token)
+          debugger
           resolve()
         }).catch(error => {
           reject(error)
@@ -52,28 +55,50 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           const result = response.result
-
           if (result.role && result.role.permissions.length > 0) {
             const role = result.role
+            // console.log("role:"+ JSON.stringify(role))
             role.permissions = result.role.permissions
+            // console.log("role.permissions:"+ JSON.stringify(role.permissions))
             role.permissions.map(per => {
               if (per.actionEntitySet != null && per.actionEntitySet.length > 0) {
                 const action = per.actionEntitySet.map(action => { return action.action })
                 per.actionList = action
               }
             })
+            // console.log("role.permissions:"+ JSON.stringify(role.permissions))
             role.permissionList = role.permissions.map(permission => { return permission.permissionId })
             commit('SET_ROLES', result.role)
             commit('SET_INFO', result)
+            // console.log(role.permissionList)
           } else {
             reject('getInfo: roles must be a non-null array !')
           }
-
           commit('SET_NAME', { name: result.name, welcome: welcome() })
           commit('SET_AVATAR', result.avatar)
-
           resolve(response)
         }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+    //ajj系统获取用户信息
+    GsoftGetInfo({commit}){
+      return new Promise((resolve,reject)=>{
+        gsoftGetInfo().then(response=>{
+          const result=response.result
+          if(result.data.length >0){
+            result.initData=initGsoftInfo(result.data)
+              // const permissionList = initData.permissionList;
+              // const routes=initData.routes;
+            commit('SET_INFO', result)
+          } else{
+            reject('gsoftGetInfo:data must be a non-null array !')
+          }
+          commit('SET_NAME', { name: '等接口', welcome: '欢迎回来！' })
+          resolve(response)
+        }).catch(error=>{
           reject(error)
         })
       })
