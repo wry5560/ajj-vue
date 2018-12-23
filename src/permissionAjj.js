@@ -20,16 +20,21 @@ router.beforeEach((to, from, next) => {
       next({ path: '/dashboard/workplace' })
       NProgress.done()
     } else {
+      console.log(store.getters.roles.length)
+      // debugger
       if (store.getters.roles.length === 0) {
         store
           .dispatch('GsoftGetInfo')
           .then(res => {
-            const roles = res.result && res.result.initData
-            store.dispatch('GenerateGsoftRoutes ', { roles }).then(() => {
+            const roles = res.data && res.data.initData
+            // debugger
+            store.dispatch('GenerateGsoftRoutes', { roles }).then(() => {
               // 根据roles权限生成可访问的路由表
               // 动态添加可访问路由表
+              // debugger
               router.addRoutes(store.getters.addRouters)
               const redirect = decodeURIComponent(from.query.redirect || to.path)
+              // debugger
               if (to.path === redirect) {
                 // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
                 next({ ...to, replace: true })

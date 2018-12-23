@@ -11,10 +11,12 @@
 
 <script>
   import GlobalLayout from '@/components/page/GlobalLayout'
+  import Iframe from "../Iframe/Iframe";
 
   export default {
     name: 'BasicLayout',
     components: {
+      Iframe,
       GlobalLayout
     },
     data () {

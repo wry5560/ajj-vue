@@ -1,5 +1,5 @@
-
-
+import {asyncRouterMap}from "@/config/router.config"
+import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/components/layouts'
 const testData = [
   {
     "abolishedBy": null,
@@ -7419,30 +7419,45 @@ const initGsoftInfo=(data)=>{
       }
       if (childrenData.act==""||childrenData.act=="g.html"){
         childRoute={
-          "path":String(childrenData.id),
+          "path":'/g.html/menuId/'+ String(childrenData.id),
           "name":String(childrenData.id),
           "component":() => import('@/views/iframeMenu/IframeMenu'),
-          "meta":{ title: childrenData.name, icon: childrenData.iconFile, keepAlive: true, permission: String(childrenData.id)},
+          "meta":{ title: childrenData.name, icon: childrenData.iconFile && childrenData.iconFile !="" ? childrenData.iconFile:'none', keepAlive: true, permission: String(childrenData.id)},
           "children":null
         }
       }else{
         childRoute={
-          "path":childrenData.act,
+          "path":'/'+childrenData.act,
           "name":String(childrenData.id),
           "component":() => import('@/views/'+ childrenData.act),
-          "meta":{ title: childrenData.name, icon: childrenData.iconFile, keepAlive: true, permission: String(childrenData.id)},
+          "meta":{ title: childrenData.name, icon: childrenData.iconFile && childrenData.iconFile !="" ? childrenData.iconFile:'none', keepAlive: true, permission: String(childrenData.id)},
           "children":null
         }
       }
       if (childrenData.children && childrenData.children.length >0 ){
         childRoute.children= childrenData.children.map((item)=>findChildrenId(item))
+        childRoute.component=RouteView
+        childRoute.redirect=childRoute.children[0].path
       }
       // console.log(childRoute)
       return childRoute
   };
+    const gsoftRoutes = data.map((item)=>findChildrenId(item))
+    const gsoftRootRoute={
+      "path":'/g.html',
+      "name":'g.html',
+      hidden:true,
+      redirect:gsoftRoutes[0].path,
+      "children":null
+    }
+    console.log(asyncRouterMap[0].children)
+    gsoftRoutes.push(gsoftRootRoute)
+    console.log(gsoftRoutes)
+    asyncRouterMap[0].children=asyncRouterMap[0].children.concat(gsoftRoutes)
+    console.log(asyncRouterMap)
     return {
       permissionList:permissionList,
-      routes:data.map((item)=>findChildrenId(item))
+      routes:asyncRouterMap
     };
 }
 

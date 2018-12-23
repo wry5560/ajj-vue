@@ -5,7 +5,7 @@
         v-model="activeKey"
         type="editable-card"
         @edit="onEdit"
-        hideAdd="true"
+        hideAdd= true
         size="small"
       >
         <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">

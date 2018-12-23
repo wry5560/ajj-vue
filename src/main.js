@@ -10,7 +10,8 @@ import Antd from 'ant-design-vue'
 import Viser from 'viser-vue'
 import 'ant-design-vue/dist/antd.less'  // or 'ant-design-vue/dist/antd.less'
 
-import '@/permissionAjj' // permission control
+// import '@/permission' // permission control
+import '@/permissionAjj' // ajj permission control
 import '@/utils/filter' // base filter
 import PermissionHelper from '@/utils/helper/permission'
 

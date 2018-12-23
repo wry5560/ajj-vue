@@ -57,7 +57,7 @@ export default {
     }
   },
   methods: {
-    renderIcon: function(h, icon) {
+    renderIcon: function(h,icon) {
       return icon === 'none' || icon === undefined ? null : h(Icon, { props: { type: icon !== undefined ? icon : '' } })
     },
     renderMenuItem: function(h, menu, pIndex, index) {

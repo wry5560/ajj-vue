@@ -20,12 +20,16 @@ router.beforeEach((to, from, next) => {
       next({ path: '/dashboard/workplace' })
       NProgress.done()
     } else {
+      // console.log(store.getters.roles.length)
+      // debugger
       if (store.getters.roles.length === 0) {
+        // debugger
         store
           .dispatch('GetInfo')
           .then(res => {
             const roles = res.result && res.result.role
-            store.dispatch('GenerateRoutes', { roles }).then(() => {
+            console.log(roles)
+            store.dispatch('GenerateRoutes', {roles} ).then(() => {
               // 根据roles权限生成可访问的路由表
               // 动态添加可访问路由表
               router.addRoutes(store.getters.addRouters)

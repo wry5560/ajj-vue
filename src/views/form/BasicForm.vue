@@ -121,6 +121,11 @@
 
       }
     },
+    beforeRouteEnter (to, from, next) {
+      next(vm=>{
+        debugger
+      })
+    },
     methods: {
 
       // handler

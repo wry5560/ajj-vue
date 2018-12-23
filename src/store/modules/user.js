@@ -39,10 +39,8 @@ const user = {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
           const result = response.result
-          debugger
           Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
           commit('SET_TOKEN', result.token)
-          debugger
           resolve()
         }).catch(error => {
           reject(error)
@@ -87,12 +85,13 @@ const user = {
     GsoftGetInfo({commit}){
       return new Promise((resolve,reject)=>{
         gsoftGetInfo().then(response=>{
-          const result=response.result
-          if(result.data.length >0){
-            result.initData=initGsoftInfo(result.data)
+          const data=response.data
+          if(data.length >0){
+            data.initData=initGsoftInfo(data)
               // const permissionList = initData.permissionList;
               // const routes=initData.routes;
-            commit('SET_INFO', result)
+            commit('SET_ROLES', data)
+            commit('SET_INFO', response)
           } else{
             reject('gsoftGetInfo:data must be a non-null array !')
           }

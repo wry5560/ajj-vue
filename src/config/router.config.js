@@ -14,6 +14,7 @@ export const asyncRouterMap = [
         path: '/dashboard',
         name: 'dashboard',
         redirect: '/dashboard/workplace',
+        // hidden: true,
         component: RouteView,
         meta: { title: '仪表盘', icon: 'dashboard', permission: [ 'dashboard' ] },
         children: [
@@ -286,20 +287,32 @@ export const asyncRouterMap = [
 
       // Iframe Test
       {
-        path:"/iframe",
+        path:'/iframe',
         component: RouteView,
-        name:"iframeTest",
+        name:'iframe',
+        redirect:'/iframe/baidu',
         meta: { title: 'Iframe页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
         children: [
             {
               path: '/iframe/baidu',
-              name: 'baidu',
+              name: 'iframeBaidu',
               component: () => import('@/views/iframeMenu/IframeMenu'),
-              meta: { title: '百度', keepAlive: true, permission: [ 'user' ] }
-            }
+              meta: { title: '百度iframe', keepAlive: true, permission: [ 'user' ] },
+            },
+          {
+            path: '/iframe/taobao',
+            name: 'iframeTaobao',
+            component: () => import('@/views/iframeMenu/IframeMenu1'),
+            meta: { title: '淘宝iframe', keepAlive: true, permission: [ 'user' ] },
+          },
+          {
+            path: '/iframe/qq',
+            name: 'iframeQQ',
+            component: () => import('@/views/iframeMenu/IframeMenu2'),
+            meta: { title: 'QQiframe', keepAlive: true, permission: [ 'user' ] },
+          }
           ]
       }
-
     ]
   },
   {

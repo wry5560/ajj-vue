@@ -5,8 +5,7 @@
     :src="menuUrl"
     seamless="seamless"
     frameborder="0"
-    height="100%"
-    width="100%"
+    style="width:calc(100% + 48px);height:calc(100% + 24px)"
   ></iframe>
 </template>
 
