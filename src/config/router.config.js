@@ -296,13 +296,15 @@ export const asyncRouterMap = [
             {
               path: '/iframe/baidu',
               name: 'iframeBaidu',
-              component: () => import('@/views/iframeMenu/IframeMenu'),
+              component: () => import('@/views/test/myTest'),
               meta: { title: '百度iframe', keepAlive: true, permission: [ 'user' ] },
             },
           {
             path: '/iframe/taobao',
             name: 'iframeTaobao',
-            component: () => import('@/views/iframeMenu/IframeMenu1'),
+            components:{
+              iframeView:() => import('@/views/iframeMenu/IframeMenu1'),
+            },
             meta: { title: '淘宝iframe', keepAlive: true, permission: [ 'user' ] },
           },
           {
@@ -310,6 +312,35 @@ export const asyncRouterMap = [
             name: 'iframeQQ',
             component: () => import('@/views/iframeMenu/IframeMenu2'),
             meta: { title: 'QQiframe', keepAlive: true, permission: [ 'user' ] },
+          },
+          {
+            path: '/iframe/test',
+            name: 'myTest',
+            redirect:'/iframe/baidu',
+            component: () => import('@/views/test/myTest'),
+            meta: { title: '测试', keepAlive: true, permission: [ 'user' ] },
+            children:[
+              {
+                path: '/iframe/test/aaa',
+                name: 'iframeaaa',
+                components:{
+                  default:() => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
+                  bbb:() => import('@/views/iframeMenu/IframeMenu2'),
+                  aaa:() => import('@/views/iframeMenu/IframeMenu1')
+                },
+                meta: { title: 'Iframe页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
+              },
+              {
+                path: '/iframe/test/bbb',
+                name: 'iframebbb',
+                components:{
+                  default:() => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
+                  bbb:() => import('@/views/iframeMenu/IframeMenu1'),
+                  aaa:() => import('@/views/iframeMenu/IframeMenu2')
+                },
+                meta: { title: 'Iframe页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
+              }
+            ]
           }
           ]
       }
@@ -334,7 +365,7 @@ export const constantRouterMap = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login')
+        component:() => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
       },
       {
         path: 'register',

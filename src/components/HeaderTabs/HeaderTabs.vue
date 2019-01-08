@@ -4,35 +4,70 @@
       <a-tabs
         v-model="activeKey"
         type="editable-card"
+        @change="tabChange"
         @edit="onEdit"
-        hideAdd= true
+        :hideAdd= "true"
         size="small"
       >
         <a-tab-pane v-for="pane in panes" :tab="pane.title" :key="pane.key" :closable="pane.closable">
         </a-tab-pane>
       </a-tabs>
     </div>
-
   </div>
 </template>
 <script>
 
   export default {
     data () {
-      const panes = [
-        { title: 'Tab 1',  key: '1' },
-        { title: 'Tab 2',  key: '2' },
-        { title: 'Tab 3',  key: '3' },
-      ]
-      return {
-        activeKey: panes[0].key,
-        panes,
-        newTabIndex: 0,
+      return {}
+    },
+    computed:{
+      panes(){
+        return this.$store.state.headerTabs.panes
+      },
+      activeKey:{
+        get:function (){return this.$store.state.headerTabs.activeKey},
+        set:function () {}
+      },
+      newTabIndex(){
+        return this.$store.state.headerTabs.newTabIndex
       }
+    },
+    created(){
+      const payload={
+        title:this.$route.meta.title ? this.$route.meta.title:'',
+        key: this.$route.path
+      }
+      this.$store.commit('ADD_HEADERTAB',payload)
+    },
+    watch:{
+      '$route':'addTabs'
     },
     methods: {
       callback (key) {
         console.log(key)
+      },
+      addTabs(){
+        let title=''
+        function matchTitle(path,routers) {
+          routers.forEach((router)=>{
+            if (router.path ===path && router.meta.title){
+              title=router.meta.title
+            }
+            if (router.children){matchTitle(path,router.children)}
+          })
+        }
+        matchTitle(this.$route.path,this.$store.getters.addRouters)
+        // debugger
+        const payload={
+          title:title,
+          key :this.$route.path
+        }
+        this.$store.commit('ADD_HEADERTAB',payload)
+      },
+      tabChange(activekey){
+        this.$store.commit('CHANGE_HEADERTAB_ACTIVEKEY',activekey)
+        this.$router.push(activekey)
       },
       onEdit (targetKey, action) {
         this[action](targetKey)
@@ -53,11 +88,12 @@
           }
         })
         const panes = this.panes.filter(pane => pane.key !== targetKey)
-        if (lastIndex >= 0 && activeKey === targetKey) {
-          activeKey = panes[lastIndex].key
+        if (activeKey === targetKey) {
+          lastIndex >= 0 ? activeKey = panes[lastIndex].key :activeKey=panes[0].key
         }
-        this.panes = panes
-        this.activeKey = activeKey
+        this.$store.commit('REMOVE_HEADERTAB',targetKey)
+        this.$store.commit('CHANGE_HEADERTAB_ACTIVEKEY',activeKey)
+        this.$router.push(activeKey)
       },
     },
   }

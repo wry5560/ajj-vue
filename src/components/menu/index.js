@@ -140,7 +140,10 @@ export default {
           select: obj => {
             this.selectedKeys = obj.selectedKeys
             this.$emit('select', obj)
-          }
+          },
+          click: obj => {
+            this.$emit('onClick', obj)
+          },
         }
       },
       this.renderMenu(h, this.menu)

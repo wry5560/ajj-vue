@@ -11,6 +11,7 @@
       :menu="menus"
       :theme="theme"
       :mode="mode"
+      @onClick="onClick"
       @select="onSelect"
       style="padding: 16px 0px;"></s-menu>
   </a-layout-sider>
@@ -56,6 +57,25 @@
     methods: {
       onSelect (obj) {
         this.$emit('menuSelect', obj)
+      },
+      onClick(obj){
+        // let title=''
+        // function matchTitle(path,routers) {
+        //   routers.forEach((router)=>{
+        //     if (router.path ===path && router.meta.title){
+        //       title=router.meta.title
+        //     }
+        //     if (router.children){matchTitle(path,router.children)}
+        //   })
+        // }
+        // matchTitle(obj.key,this.$store.getters.addRouters)
+        // // debugger
+        // const payload={
+        //   title:title,
+        //   key :obj.key
+        // }
+        // this.$store.commit('ADD_HEADERTAB',payload)
+        // debugger
       }
     }
   }

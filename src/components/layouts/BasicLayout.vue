@@ -2,9 +2,11 @@
   <global-layout>
     <transition name="page-transition">
       <keep-alive v-if="keepAlive">
-        <router-view />
+        <router-view/>
       </keep-alive>
-      <router-view v-else />
+      <template v-else >
+        <router-view/>
+      </template>
     </transition>
   </global-layout>
 </template>

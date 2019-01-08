@@ -29,8 +29,8 @@
     },
     computed:{
         getMenuPath(){
-          // return 'http://feooe.myds.me:6200/asrsajj/g.html?menuId='+ this.menuPathName
-          return 'https://www.baidu.com'
+          return 'http://feooe.myds.me:6200/asrsajj/g.html?menuId='+ this.menuPathName
+          // return 'https://www.baidu.com'
         }
     }
   }
