@@ -29,6 +29,14 @@
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
+          <a-form-item
+            fieldDecoratorId="code"
+            :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入验证码' }], validateTrigger: 'change'}"
+          >
+            <a-input size="large" type="text" autocomplete="false" placeholder="9999">
+              <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
+            </a-input>
+          </a-form-item>
         </a-tab-pane>
         <a-tab-pane key="tab2" tab="手机号登陆">
           <a-form-item
@@ -115,7 +123,7 @@ import api from '@/api'
 import TwoStepCaptcha from '@/components/tools/TwoStepCaptcha'
 import { mapActions } from 'vuex'
 import { timeFix } from '@/utils/util'
-
+import { Base64 } from 'js-base64'
 export default {
   components: {
     TwoStepCaptcha
@@ -154,7 +162,7 @@ export default {
     // this.requiredTwoStepCaptcha = true
   },
   methods: {
-    ...mapActions(['Login', 'Logout']),
+    ...mapActions(['Login', 'Logout','LoginAjj']),
     // handler
     handleUsernameOrEmail(rule, value, callback) {
       const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
@@ -179,11 +187,12 @@ export default {
 
       // 使用账户密码登陆
       if (that.customActiveKey === 'tab1') {
-        that.form.validateFields(['username', 'password'], { force: true }, (err, values) => {
+        that.form.validateFields(['username', 'password','code'], { force: true }, (err, values) => {
           if (!err) {
             flag = true
-            loginParams[!that.loginType ? 'email' : 'username'] = values.username
-            loginParams.password = md5(values.password)
+            loginParams[!that.loginType ? 'email' : 'ueserLoginId'] = Base64.encode('yeshi'+values.username)
+            loginParams.pwd = Base64.encode('yeshi'+ values.password)
+            loginParams.randCode = values.code
           }
         })
         // 使用手机号登陆
@@ -201,7 +210,7 @@ export default {
       that.loginBtn = true
 
       that
-        .Login(loginParams)
+        .LoginAjj(loginParams)
         .then(() => {
           if (that.requiredTwoStepCaptcha) {
             that.stepCaptchaVisible = true
@@ -261,7 +270,7 @@ export default {
     },
     loginSuccess() {
       this.loginBtn = false
-      this.$router.push({ name: '/12' })
+      this.$router.push({ name: '/dashboard/workplace' })
       this.$notification.success({
         message: '欢迎',
         description: `${timeFix()}，欢迎回来`

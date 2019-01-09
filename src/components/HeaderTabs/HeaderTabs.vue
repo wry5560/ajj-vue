@@ -47,7 +47,8 @@
       callback (key) {
         console.log(key)
       },
-      addTabs(){
+      addTabs(to){
+        if (to.name==='Exception404'&& this.$store.state.headerTabs.panes.length===0)return
         let title=''
         function matchTitle(path,routers) {
           routers.forEach((router)=>{
@@ -88,6 +89,12 @@
           }
         })
         const panes = this.panes.filter(pane => pane.key !== targetKey)
+        if (panes.length===0){
+          this.$store.commit('REMOVE_HEADERTAB',targetKey)
+          this.$store.commit('CHANGE_HEADERTAB_ACTIVEKEY','')
+          this.$router.push('/exception/404')
+          return
+          }
         if (activeKey === targetKey) {
           lastIndex >= 0 ? activeKey = panes[lastIndex].key :activeKey=panes[0].key
         }

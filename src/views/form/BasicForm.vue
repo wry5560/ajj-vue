@@ -123,7 +123,7 @@
     },
     beforeRouteEnter (to, from, next) {
       next(vm=>{
-        debugger
+//        debugger
       })
     },
     methods: {

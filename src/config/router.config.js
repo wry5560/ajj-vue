@@ -318,7 +318,7 @@ export const asyncRouterMap = [
             meta: { title: '测试', keepAlive: true, permission: [ 'user' ] },
           }
           ]
-      }
+      },
     ]
   },
   {
@@ -374,7 +374,7 @@ export const constantRouterMap = [
   },
   {
     path:'/index.html',
-    redirect:'/'
+    redirect:'/dashboard/workplace'
   },
   {
     path: '/404',

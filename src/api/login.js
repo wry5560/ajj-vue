@@ -1,5 +1,6 @@
 import api from './index'
 import { axios } from '@/utils/request'
+import Qs from 'qs'
 
 /**
  * login func
@@ -19,7 +20,15 @@ export function login(parameter) {
     data: parameter
   })
 }
+export function loginAjj(parameter) {
 
+  const parameterQs=Qs.stringify(parameter)
+  return axios({
+    url: '/login.html?m=loginAjj',
+    method: 'post',
+    data: parameterQs
+  })
+}
 export function getSmsCaptcha(parameter) {
   return axios({
     url: api.SendSms,
@@ -50,7 +59,7 @@ export function logout() {
 
 export function gsoftGetInfo() {
   return axios({
-    url: '/user/gsoftInfo',
+    url: '/base/SysMenu.query.json',
     method: 'get',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8'
