@@ -7455,9 +7455,22 @@ const initGsoftInfo=(data)=>{
     console.log(gsoftRoutes)
     asyncRouterMap[0].children=asyncRouterMap[0].children.concat(gsoftRoutes)
     console.log(asyncRouterMap)
+
+  let iframePages=[]
+  const findIframePaths=(routes)=>{
+    // debugger
+    routes.forEach((route)=>{
+
+      iframePages.push(route.path)
+      // debugger
+      if (route.children && route.children.length>0){findIframePaths(route.children)}
+    })
+  }
+  findIframePaths(gsoftRoutes)
     return {
       permissionList:permissionList,
-      routes:asyncRouterMap
+      routes:asyncRouterMap,
+      iframePages:iframePages
     };
 }
 

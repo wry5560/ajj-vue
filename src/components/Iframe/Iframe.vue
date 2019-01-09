@@ -1,7 +1,7 @@
 <template>
   <iframe
     scrolling="auto"
-    :name="menuName"
+    :path="menuPath"
     :src="menuUrl"
     seamless="seamless"
     frameborder="0"
@@ -11,19 +11,16 @@
 
 <script>
   export default{
-      name:"Iframe",
+      name:"IframePages",
       props:{
-          menuName:{
+          menuPath:{
               type:String,
-              required: false,
-              default:'Iframe'
           },
           menuUrl:{
               type:String,
               required: true,
-              default:'https://www.baidu.com'
           }
-      }
+      },
   }
 </script>
 <style lang="scss">

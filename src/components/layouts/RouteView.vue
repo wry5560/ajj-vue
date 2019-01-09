@@ -1,16 +1,8 @@
 <template>
-  <span v-if="keepAlive">
-    <keep-alive>
+    <keep-alive  v-if="keepAlive">
     <router-view />
   </keep-alive>
-    <keep-alive>
-      <router-view name="iframeView"></router-view>
-    </keep-alive>
-  </span>
-  <span v-else >
-    <router-view />
-    <router-view name="iframeView"></router-view>
-  </span>
+    <router-view v-else/>
 </template>
 
 <script>

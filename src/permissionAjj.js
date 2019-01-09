@@ -27,6 +27,7 @@ router.beforeEach((to, from, next) => {
           .dispatch('GsoftGetInfo')
           .then(res => {
             const roles = res.data && res.data.initData
+            store.commit('INIT_IFRAME_PAGES',roles.iframePages)
             // debugger
             store.dispatch('GenerateGsoftRoutes', { roles }).then(() => {
               // 根据roles权限生成可访问的路由表

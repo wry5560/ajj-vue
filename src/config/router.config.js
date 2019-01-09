@@ -302,45 +302,20 @@ export const asyncRouterMap = [
           {
             path: '/iframe/taobao',
             name: 'iframeTaobao',
-            components:{
-              iframeView:() => import('@/views/iframeMenu/IframeMenu1'),
-            },
+            component:() => import('@/views/iframeMenu/IframeMenu'),
             meta: { title: '淘宝iframe', keepAlive: true, permission: [ 'user' ] },
           },
           {
             path: '/iframe/qq',
             name: 'iframeQQ',
-            component: () => import('@/views/iframeMenu/IframeMenu2'),
+            component: () => import('@/views/iframeMenu/IframeMenu'),
             meta: { title: 'QQiframe', keepAlive: true, permission: [ 'user' ] },
           },
           {
             path: '/iframe/test',
             name: 'myTest',
-            redirect:'/iframe/baidu',
             component: () => import('@/views/test/myTest'),
             meta: { title: '测试', keepAlive: true, permission: [ 'user' ] },
-            children:[
-              {
-                path: '/iframe/test/aaa',
-                name: 'iframeaaa',
-                components:{
-                  default:() => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
-                  bbb:() => import('@/views/iframeMenu/IframeMenu2'),
-                  aaa:() => import('@/views/iframeMenu/IframeMenu1')
-                },
-                meta: { title: 'Iframe页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
-              },
-              {
-                path: '/iframe/test/bbb',
-                name: 'iframebbb',
-                components:{
-                  default:() => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
-                  bbb:() => import('@/views/iframeMenu/IframeMenu1'),
-                  aaa:() => import('@/views/iframeMenu/IframeMenu2')
-                },
-                meta: { title: 'Iframe页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
-              }
-            ]
           }
           ]
       }
@@ -365,7 +340,7 @@ export const constantRouterMap = [
       {
         path: 'login',
         name: 'login',
-        component:() => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
+        component:() => import(/* webpackChunkName: "user" */ '@/views/user/Login-ajj'),
       },
       {
         path: 'register',
@@ -397,7 +372,10 @@ export const constantRouterMap = [
       }
     ]
   },
-
+  {
+    path:'/index.html',
+    redirect:'/'
+  },
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')

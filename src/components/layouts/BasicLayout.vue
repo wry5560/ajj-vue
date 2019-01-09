@@ -1,34 +1,75 @@
 <template>
   <global-layout>
     <transition name="page-transition">
-      <keep-alive v-if="keepAlive">
-        <router-view/>
-      </keep-alive>
-      <template v-else >
-        <router-view/>
-      </template>
+      <span>
+        <span v-show="!showIframe">
+          <keep-alive  v-if="keepAlive" >
+            <router-view/>
+          </keep-alive>
+          <router-view  v-else/>
+        </span>
+        <keep-alive>
+          <span v-show="showIframe">
+          <iframe-pages v-for="route in iframePages" :menuUrl="baseUrl+route.menuId" v-show="route.path ===pathNow"></iframe-pages>
+        </span>
+        </keep-alive>
+      </span>
     </transition>
   </global-layout>
 </template>
-
 <script>
   import GlobalLayout from '@/components/page/GlobalLayout'
-  import Iframe from "../Iframe/Iframe";
+  import IframePages from "../Iframe/Iframe.vue";
 
   export default {
     name: 'BasicLayout',
     components: {
-      Iframe,
+      IframePages,
       GlobalLayout
     },
     data () {
       return {
-
+          baseUrl:'http://feooe.myds.me:6200/asrsajj/g.html?menuId='
+      }
+    },
+    created(){
+      if (this.$store.state.iframePages.pages.indexOf(this.$route.path)>=0) {
+        const payload={
+          path:this.$route.path,
+          menuId:this.$route.name
+        }
+        this.$store.commit('ADD_PAGE',payload)
+        this.$store.commit('SHOW_IFRAMEPAGES')
+      }
+    },
+    watch: {
+      '$route' (to, from) {
+//        debugger
+        if (this.$store.state.iframePages.pages.indexOf(to.path)>=0) {
+          const payload={
+            path:to.path,
+            menuId:to.name
+          }
+          this.$store.commit('ADD_PAGE',payload)
+          this.$store.commit('SHOW_IFRAMEPAGES')
+        }else{
+//          debugger
+          this.$store.commit('NOT_SHOW_IFRAMEPAGES')
+        }
       }
     },
     computed: {
       keepAlive () {
         return this.$route.meta.keepAlive
+      },
+      showIframe(){
+        return this.$store.state.iframePages.showIframe
+      },
+      iframePages(){
+        return this.$store.state.iframePages.routes
+      },
+      pathNow(){
+        return this.$route.path
       }
     },
     methods: {
