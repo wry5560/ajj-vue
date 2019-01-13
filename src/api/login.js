@@ -1,6 +1,7 @@
 import api from './index'
 import { axios } from '@/utils/request'
 import Qs from 'qs'
+import request from 'request'
 
 /**
  * login func
@@ -21,13 +22,29 @@ export function login(parameter) {
   })
 }
 export function loginAjj(parameter) {
-
+    console.log(parameter)
   const parameterQs=Qs.stringify(parameter)
   return axios({
-    url: '/login.html?m=loginAjj',
+    url: '/admin/jsonp-login.tk4loginNew.json',
     method: 'post',
-    data: parameterQs
+    data: parameter
   })
+
+  // return new Promise( (resolve, reject) =>{
+  //   request.post({
+  //     // url: '/login.html?m=loginAjj',
+  //     // url: 'http://feooe.myds.me:6200/asrsajj/admin/jsonp-login.tk4loginNew.json',
+  //     url: 'http://localhost:6200/api/admin/jsonp-login.tk4loginNew.json',
+  //     form: parameter
+  //   },(err, res) => {
+  //     // debugger
+  //     // console.log(JSON.stringify(res.headers))
+  //     resolve(res)
+  //     // console.log(body)
+  //   }).catch(err =>{
+  //     reject(err)
+  //   })
+  // })
 }
 export function getSmsCaptcha(parameter) {
   return axios({

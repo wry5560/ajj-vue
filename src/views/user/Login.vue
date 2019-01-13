@@ -210,6 +210,7 @@ export default {
           }
         })
         .catch(err => {
+          debugger
           that.requestFailed(err)
         })
     },
@@ -261,7 +262,7 @@ export default {
     },
     loginSuccess() {
       this.loginBtn = false
-      this.$router.push({ name: '/' })
+      this.$router.push({ name: '/dashboard/workplace' })
       this.$notification.success({
         message: '欢迎',
         description: `${timeFix()}，欢迎回来`

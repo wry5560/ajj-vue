@@ -7,8 +7,10 @@ import { ACCESS_TOKEN } from '@/store/mutation-types'
 
 // 创建 axios 实例
 const service = axios.create({
-  baseURL: '/api', // api base_url
-  // baseURL: '/asrsajj', // api base_url 真实环境
+  // baseURL: '/api', // api base_url
+  baseURL:process.env.NODE_ENV === 'production'
+    ? '/asrsajj' //  真实环境
+    :'/api', //  测试环境
   timeout: 6000, // 请求超时时间
   withCredentials:true
 })
@@ -45,7 +47,6 @@ service.interceptors.request.use(config => {
 
 // response interceptor
 service.interceptors.response.use((response) => {
-    // debugger
     return response.data
   }, err)
 

@@ -190,9 +190,12 @@ export default {
         that.form.validateFields(['username', 'password','code'], { force: true }, (err, values) => {
           if (!err) {
             flag = true
-            loginParams[!that.loginType ? 'email' : 'ueserLoginId'] = Base64.encode('yeshi'+values.username)
-            loginParams.pwd = Base64.encode('yeshi'+ values.password)
-            loginParams.randCode = values.code
+            // loginParams[!that.loginType ? 'email' : 'ueserLoginId'] = Base64.encode('yeshi'+values.username)
+            loginParams[!that.loginType ? 'email' : 'uid'] = values.username
+            loginParams.psrc = md5(values.password)
+            loginParams.version = '99.0.0'
+            loginParams.buildId = '9'
+            // loginParams.randCode = values.code
           }
         })
         // 使用手机号登陆
@@ -215,10 +218,12 @@ export default {
           if (that.requiredTwoStepCaptcha) {
             that.stepCaptchaVisible = true
           } else {
+            debugger
             that.loginSuccess()
           }
         })
         .catch(err => {
+          debugger
           that.requestFailed(err)
         })
     },
@@ -269,8 +274,9 @@ export default {
       })
     },
     loginSuccess() {
+      // debugger
       this.loginBtn = false
-      this.$router.push({ name: '/dashboard/workplace' })
+      this.$router.push({ name: '/dashboard/workplace'})
       this.$notification.success({
         message: '欢迎',
         description: `${timeFix()}，欢迎回来`
