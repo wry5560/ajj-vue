@@ -14,6 +14,7 @@ import 'ant-design-vue/dist/antd.less'  // or 'ant-design-vue/dist/antd.less'
 import '@/permissionAjj' // ajj permission control
 import '@/utils/filter' // base filter
 import PermissionHelper from '@/utils/helper/permission'
+import '@babel/polyfill'
 
 import {
   ACCESS_TOKEN,
