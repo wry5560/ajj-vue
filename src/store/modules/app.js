@@ -26,7 +26,7 @@ const app = {
     autoHideHeader: false,
     color: null,
     weak: false,
-    freshView: false
+    freshKeepAlive: false
   },
   mutations: {
     SET_SIDEBAR_TYPE: (state, type) => {
@@ -74,12 +74,12 @@ const app = {
       Vue.ls.set(DEFAULT_COLOR_WEAK, flag)
       state.weak = flag
     },
-    FRESH_VIEW_START:(state)=>{
-      state.freshView= true;
+    SET_FRESH_KEEPALIVE:(state)=>{
+      state.freshKeepAlive = true
     },
-    FRESH_VIEW_END:(state)=>{
-      state.freshView= false;
-    },
+    RESET_FRESH_KEEPALIVE:(state)=>{
+      state.freshKeepAlive = false
+    }
   },
   actions: {
     setSidebar: ({ commit }, type) => {

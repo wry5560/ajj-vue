@@ -13,6 +13,7 @@
         console.debug('closeTabs')
       },
       reFreshRoute(){
+        //iframe页面的刷新
         if (this.$store.state.iframePages.pages.indexOf(this.$route.path)>0){
             // debugger
           const thisFrameRouteIndex =this.$store.state.iframePages.routes.findIndex((item)=>{return item.path==this.$route.path})
@@ -21,8 +22,14 @@
             setTimeout(()=>this.$store.state.iframePages.routes.push(thisFrameRoute[0]),65)
           }
         }else{
-          this.$store.commit('FRESH_VIEW_START')
-          setTimeout(()=>this.$store.commit('FRESH_VIEW_END'),65)
+          //普通vue router页面的刷新
+          if (this.$route.meta.keepAlive){
+            this.$store.commit('SET_FRESH_KEEPALIVE')
+            this.$route.meta.keepAlive = false
+            this.$router.push('/fresh')
+          }else{
+            this.$router.push('/fresh')
+          }
         }
       },
     }

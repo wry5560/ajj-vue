@@ -3,17 +3,15 @@
     <transition name="page-transition">
       <span>
         <span v-show="!showIframe">
-          <keep-alive  v-if="keepAlive  && !freshView" >
+          <keep-alive  v-if="keepAlive" >
             <router-view/>
           </keep-alive>
-          <span  v-else>
-            <router-view  v-if="!freshView"/>
-          </span>
+            <router-view />
         </span>
         <keep-alive>
           <span v-show="showIframe">
-          <iframe-pages  v-for="route in iframePages" :menuUrl="baseUrl+route.menuId" v-show="route.path ===pathNow"></iframe-pages>
-        </span>
+            <iframe-pages  v-for="route in iframePages" :menuUrl="baseUrl+route.menuId" v-show="route.path ===pathNow"></iframe-pages>
+          </span>
         </keep-alive>
       </span>
     </transition>
@@ -75,9 +73,6 @@
       pathNow(){
         return this.$route.path
       },
-      freshView(){
-        return this.$store.state.app.freshView
-      }
     },
     methods: {
 

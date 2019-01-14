@@ -319,6 +319,15 @@ export const asyncRouterMap = [
           }
           ]
       },
+
+      //刷新中间页
+      {
+        path: '/fresh',
+        component: () => import('@/components/tools/ToFresh'),
+        name: 'freshPage',
+        hidden: true,
+        meta: {title: '刷新',  keepAlive: false, permission: ['user']},
+      }
     ]
   },
   {
