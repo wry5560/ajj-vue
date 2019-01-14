@@ -16,6 +16,7 @@ import '@/utils/filter' // base filter
 import PermissionHelper from '@/utils/helper/permission'
 import '@babel/polyfill'
 
+import htmlToPdf from '@/utils/htmlToPdf' //转PDF的方法
 import {
   ACCESS_TOKEN,
   DEFAULT_COLOR,
@@ -37,6 +38,7 @@ Vue.use(Antd)
 Vue.use(VueAxios, router)
 Vue.use(Viser)
 Vue.use(PermissionHelper)
+Vue.use(htmlToPdf)
 
 new Vue({
   router,

@@ -39,8 +39,9 @@ const user = {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
           const result = response.result
-          Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', result.token)
+          const token= typeof(result.token) !="undefined"?result.token:"4291d7da9005377ec9aec4a71ea837f"
+          Vue.ls.set(ACCESS_TOKEN, token, 7 * 24 * 60 * 60 * 1000)
+          commit('SET_TOKEN',token)
           resolve()
         }).catch(error => {
           reject(error)
@@ -49,9 +50,11 @@ const user = {
     },
     //安监系统登录
     LoginAjj({ commit }, userInfo) {
+      debugger
       return new Promise((resolve, reject) => {
         loginAjj(userInfo).then(response => {
-          // debugger
+          console.log('loginAjj start')
+          debugger
           // const result = response.result
           // Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
           // commit('SET_TOKEN', result.token)

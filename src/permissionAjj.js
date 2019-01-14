@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
       next({ path: '/dashboard/workplace' })
       NProgress.done()
     } else {
-      console.log(store.getters.roles.length)
+      // console.log(store.getters.roles.length)
       // debugger
       if (store.getters.roles.length === 0) {
         store
