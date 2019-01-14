@@ -1,5 +1,6 @@
 <template>
   <div class="user-wrapper">
+    <header-buttons-bar></header-buttons-bar>
     <span class="action">
       <a-icon type="question-circle-o"></a-icon>
     </span>
@@ -40,12 +41,14 @@
 
 <script>
   import HeaderNotice from './HeaderNotice'
+  import HeaderButtonsBar from './HeaderButtonsBar'
   import { mapActions, mapGetters } from 'vuex'
 
   export default {
     name: 'UserMenu',
     components: {
-      HeaderNotice
+      HeaderNotice,
+      HeaderButtonsBar
     },
     methods: {
       ...mapActions(['Logout']),
