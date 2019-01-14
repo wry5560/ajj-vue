@@ -14,11 +14,11 @@
       },
       reFreshRoute(){
         if (this.$store.state.iframePages.pages.indexOf(this.$route.path)>0){
-            debugger
+            // debugger
           const thisFrameRouteIndex =this.$store.state.iframePages.routes.findIndex((item)=>{return item.path==this.$route.path})
           if (thisFrameRouteIndex>-1){
             const thisFrameRoute= this.$store.state.iframePages.routes.splice(thisFrameRouteIndex,1)
-            setTimeout(()=>this.$store.state.iframePages.routes.push(thisFrameRoute),65)
+            setTimeout(()=>this.$store.state.iframePages.routes.push(thisFrameRoute[0]),65)
           }
         }else{
           this.$store.commit('FRESH_VIEW_START')

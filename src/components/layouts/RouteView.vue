@@ -2,9 +2,7 @@
     <keep-alive  v-if="keepAlive">
     <router-view />
   </keep-alive>
-  <span v-else >
-    <router-view/>
-  </span>
+    <router-view v-else/>
 </template>
 
 <script>

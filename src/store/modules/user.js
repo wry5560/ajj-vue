@@ -50,11 +50,11 @@ const user = {
     },
     //安监系统登录
     LoginAjj({ commit }, userInfo) {
-      debugger
+      // debugger
       return new Promise((resolve, reject) => {
         loginAjj(userInfo).then(response => {
           console.log('loginAjj start')
-          debugger
+          // debugger
           // const result = response.result
           // Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
           // commit('SET_TOKEN', result.token)

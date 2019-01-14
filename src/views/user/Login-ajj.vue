@@ -218,12 +218,12 @@ export default {
           if (that.requiredTwoStepCaptcha) {
             that.stepCaptchaVisible = true
           } else {
-            debugger
+            // debugger
             that.loginSuccess()
           }
         })
         .catch(err => {
-          debugger
+          // debugger
           that.requestFailed(err)
         })
     },

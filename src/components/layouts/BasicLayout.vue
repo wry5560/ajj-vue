@@ -52,7 +52,9 @@
             path:to.path,
             menuId:to.name
           }
-          this.$store.commit('ADD_PAGE',payload)
+          if (this.$store.state.iframePages.pages.findIndex((item)=>{return item.path==to.path})== -1) {
+            this.$store.commit('ADD_PAGE',payload)
+          }
           this.$store.commit('SHOW_IFRAMEPAGES')
         }else{
 //          debugger
